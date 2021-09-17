@@ -1,11 +1,11 @@
-import Rectangle from "../2d/Rectangle";
 import React from "react";
+import IRectangle from "../2d/IRectangle";
 
 export default interface IWindow {
     readonly id: number;
     title: string;
     iconSrc?: string;
-    rectangle: Rectangle;
+    rectangle: IRectangle;
     isMinimized: boolean;
     isMaximized: boolean;
     zIndex: number;

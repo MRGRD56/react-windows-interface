@@ -3,6 +3,8 @@ import TaskbarAction from "../../models/store/windows/TaskbarAction";
 import TaskbarActionType from "../../models/store/windows/TaskbarActionType";
 import explorerPng from "../../assets/img/programs/explorer.png";
 import IWindow from "../../models/windows/IWindow";
+import Window from "../../models/windows/Window";
+import Rectangle from "../../models/2d/Rectangle";
 
 const defaultState: Taskbar = {
     items: [
@@ -12,12 +14,7 @@ const defaultState: Taskbar = {
                 file: {
                     name: "explorer.exe",
                     iconSrc: explorerPng,
-                    getWindow: () => {
-                        return {
-                            id: 1,
-                            isMaximized:
-                        }
-                    }
+                    getWindow: () => new Window("Explorer", Rectangle.defaultWindowRectangle)
                 }
             }
         }

@@ -1,5 +1,6 @@
 import IWindow from "./IWindow";
-import Rectangle from "../2d/Rectangle";
+import {ReactNode} from "react";
+import IRectangle from "../2d/IRectangle";
 
 export default class Window implements IWindow {
     private static lastId = 0;
@@ -12,7 +13,9 @@ export default class Window implements IWindow {
 
     constructor(
         public title: string,
-        public rectangle: Rectangle,
+        public rectangle: IRectangle,
+        public iconSrc?: string,
+        public content?: ReactNode,
         id?: number
     ) {
         this.id = id ?? ++Window.lastId;
