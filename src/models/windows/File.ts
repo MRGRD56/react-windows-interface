@@ -1,4 +1,7 @@
+import IWindow from "./IWindow";
+
 export default interface File {
     name: string;
-    iconPath?: string;
+    iconSrc?: string;
+    getWindow: () => IWindow;
 }
