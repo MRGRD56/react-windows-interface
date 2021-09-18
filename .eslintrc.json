@@ -22,8 +22,16 @@
     ],
     "rules": {
         "no-unused-vars": "warn",
-        "indent": "warn",
+        "indent": [
+            "warn",
+            4,
+            {
+                "SwitchCase": 1
+            }
+        ],
         "quotes": "error",
-        "semi": "off"
+        "semi": "off",
+        "react/react-in-jsx-scope": "off",
+        "react/display-name": "off"
     }
 }

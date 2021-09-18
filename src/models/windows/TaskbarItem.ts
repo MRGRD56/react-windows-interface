@@ -1,8 +1,9 @@
 import IWindow from "./IWindow";
-import ShortcutFile from "./ShortcutFile";
+import {List} from "immutable";
+import File from "./File";
 
 export default interface TaskbarItem {
-    file: ShortcutFile;
-    windows: IWindow[];
+    file: File;
+    windows: List<IWindow>;
     isPinned: boolean;
 }
