@@ -15,7 +15,7 @@
     "@types/react-router-dom": "^5.1.9",
     "immutable": "^4.0.0-rc.15",
     "mg-values": "^1.2.0",
-    "node-sass": "^6.0.1",
+    "node-sass": "5.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-draggable": "^4.4.4",
