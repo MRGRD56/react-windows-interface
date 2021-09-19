@@ -8,6 +8,7 @@ import Size from "../../../models/2d/Size";
 import useActions from "../../../hooks/useActions";
 import Point from "../../../models/2d/Point";
 import Side from "../../../models/2d/Side";
+import { SwitchTransition, CSSTransition } from "react-transition-group";
 import "./WindowComponent.scss";
 
 interface Props {
@@ -241,14 +242,14 @@ const WindowComponent = (props: Props) => {
 
     return (
         <div {...props}
-            className={"window " + classes({
+            className={classes({
                 "acrylic": () => true,
                 "maximized": () => props.window.isMaximized,
                 "minimized": () => props.window.isMinimized,
                 "animated-short": () => false,
                 "animated-normal": () => false,
                 "closing": () => false
-            })}
+            }, "window")}
             style={{...Rectangle.getStyle(props.window.rectangle), minWidth: getMinSize().width,
                 minHeight: getMinSize().height, zIndex: props.window.zIndex}}
             onMouseDown={onMouseDown}>

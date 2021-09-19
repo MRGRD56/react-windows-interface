@@ -4,6 +4,7 @@ import "./DesktopEnvironment.scss";
 import useAppSelector from "../../../hooks/useAppSelector";
 import TaskbarComponent from "../TaskbarComponent/TaskbarComponent";
 import WindowComponent from "../WindowComponent/WindowComponent";
+import {CSSTransition, TransitionGroup} from "react-transition-group";
 
 const DesktopEnvironment: FC<HTMLProps<HTMLDivElement>> =
     ({children, className, style, ...props}) => {
@@ -13,9 +14,15 @@ const DesktopEnvironment: FC<HTMLProps<HTMLDivElement>> =
         return (
             <div className={["de", className].join(" ").trim()}
                 style={{backgroundImage: `url(${bg})`, ...style}} {...props}>
-                {windows.map(w => (
-                    <WindowComponent key={w.id} window={w}/>
-                ))}
+                <div className="windows-wrapper">
+                    <TransitionGroup>
+                        {windows.map(w => (
+                            <CSSTransition key={w.id} classNames="window-transition" timeout={50}>
+                                <WindowComponent window={w}/>
+                            </CSSTransition>
+                        ))}
+                    </TransitionGroup>
+                </div>
                 <TaskbarComponent taskbar={taskbar}/>
             </div>
         );

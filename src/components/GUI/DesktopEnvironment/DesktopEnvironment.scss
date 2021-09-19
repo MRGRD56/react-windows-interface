@@ -8,4 +8,30 @@
         bottom: 0;
         z-index: 2147483647;
     }
+
+    .window-transition-enter {
+        transform: scale(0.7);
+        opacity: 0;
+    }
+
+    .window-transition-enter-active {
+        transition: 50ms ease-in;
+        transition-property: opacity, transform;
+        pointer-events: none;
+        background: red;
+        transform: none;
+        opacity: 1;
+    }
+
+    .window-transition-exit {
+        opacity: 1;
+    }
+
+    .window-transition-exit-active {
+        transition: 50ms ease-in;
+        transition-property: opacity, transform;
+        pointer-events: none;
+        opacity: 0;
+        transform: scale(0.7);
+    }
 }

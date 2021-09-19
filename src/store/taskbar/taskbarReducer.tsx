@@ -11,13 +11,19 @@ import IWindow from "../../models/windows/IWindow";
 import TaskbarItem from "../../models/windows/TaskbarItem";
 import File from "../../models/windows/File";
 import IRectangle from "../../models/2d/IRectangle";
+import Calculator from "../../components/programs/Calculator/Calculator";
+import Rectangle from "../../models/2d/Rectangle";
+import Size from "../../models/2d/Size";
+import {ReactNode} from "react";
+import ISize from "../../models/2d/ISize";
 
-function createTaskbarItem(fileName: string, iconSrc: string, windowTitle: string, program: Program): TaskbarItem {
+function createTaskbarItem(fileName: string, iconSrc: string, windowTitle: string, program: Program,
+    content?: ReactNode, rectangle?: IRectangle, minSize?: ISize): TaskbarItem {
     return {
         file: {
             name: fileName,
             iconSrc: iconSrc,
-            getWindow: () => new Window(windowTitle, program),
+            getWindow: () => new Window(windowTitle, program, content, rectangle, minSize, iconSrc),
             program: program
         },
         windows: List([]),
@@ -28,7 +34,10 @@ function createTaskbarItem(fileName: string, iconSrc: string, windowTitle: strin
 const defaultState: Taskbar = new Taskbar([
     createTaskbarItem("settings.exe", settingsIcon, "Settings", Program.settings),
     createTaskbarItem("explorer.exe", explorerIcon, "Explorer", Program.explorer),
-    createTaskbarItem("calc.exe", calcIcon, "Calculator", Program.calc)
+    createTaskbarItem("calc.exe", calcIcon, "Calculator", Program.calc,
+        <Calculator/>,
+        Rectangle.getScreenCenter(new Size(300, 500)),
+        new Size(300, 500))
 ]);
 
 function getTaskbarWithFile(taskbar: Taskbar, file: File): Taskbar {
