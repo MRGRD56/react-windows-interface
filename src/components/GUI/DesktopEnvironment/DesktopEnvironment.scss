@@ -1,9 +1,11 @@
 .de {
     position: relative;
     background: no-repeat center center / cover fixed;
+    overflow: hidden;
 
     .taskbar {
         position: fixed;
         bottom: 0;
+        z-index: 2147483647;
     }
 }

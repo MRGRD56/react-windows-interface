@@ -1,8 +1,9 @@
 import Taskbar from "../../models/store/windows/Taskbar";
 import TaskbarAction from "../../models/store/windows/TaskbarAction";
 import TaskbarActionType from "../../models/store/windows/TaskbarActionType";
-import explorerPng from "../../assets/img/programs/explorer.png";
-import calcPng from "../../assets/img/programs/calc.png";
+import settingsIcon from "../../assets/img/programs/settings_dark.png";
+import explorerIcon from "../../assets/img/programs/explorer.png";
+import calcIcon from "../../assets/img/programs/calc.png";
 import Window from "../../models/windows/Window";
 import Program from "../../models/windows/Program";
 import {List} from "immutable";
@@ -24,17 +25,16 @@ function createTaskbarItem(fileName: string, iconSrc: string, windowTitle: strin
     };
 }
 
-const defaultState: Taskbar = {
-    items: List([
-        createTaskbarItem("explorer.exe", explorerPng, "Explorer", Program.explorer),
-        createTaskbarItem("calc.exe", calcPng, "Calculator", Program.calc),
-    ])
-};
+const defaultState: Taskbar = new Taskbar([
+    createTaskbarItem("settings.exe", settingsIcon, "Settings", Program.settings),
+    createTaskbarItem("explorer.exe", explorerIcon, "Explorer", Program.explorer),
+    createTaskbarItem("calc.exe", calcIcon, "Calculator", Program.calc)
+]);
 
 function getTaskbarWithFile(taskbar: Taskbar, file: File): Taskbar {
     let items: List<TaskbarItem>;
     const existingTaskbarItemIndex = taskbar.items.findIndex(
-        item => item.windows.some(w => w.program == file.program));
+        item => item.file.program === file.program);
 
     if (existingTaskbarItemIndex === -1) {
         items = taskbar.items.push({
@@ -51,10 +51,7 @@ function getTaskbarWithFile(taskbar: Taskbar, file: File): Taskbar {
         });
     }
 
-    return {
-        ...taskbar,
-        items
-    };
+    return new Taskbar(items);
 }
 
 function getTaskbarWithoutWindow(taskbar: Taskbar, window: IWindow): Taskbar {
@@ -71,13 +68,10 @@ function getTaskbarWithoutWindow(taskbar: Taskbar, window: IWindow): Taskbar {
             return {
                 ...item,
                 windows: item.windows.delete(item.windows.indexOf(window))
-            }
+            };
         });
 
-    return {
-        ...taskbar,
-        items
-    }
+    return new Taskbar(items);
 }
 
 type WindowOptions =
@@ -87,21 +81,18 @@ type WindowOptions =
     {zIndex: number};
 
 function getTaskbarWithChangedWindow(taskbar: Taskbar, window: IWindow, newWindowOptions: WindowOptions): Taskbar {
-    return {
-        ...taskbar,
-        items: taskbar.items.map(item => {
-            return {
-                ...item,
-                windows: item.windows.map(w => {
-                    if (w !== window) return w;
-                    return {
-                        ...w,
-                        ...newWindowOptions
-                    }
-                })
-            }
-        })
-    };
+    return new Taskbar(taskbar.items.map(item => {
+        return {
+            ...item,
+            windows: item.windows.map(w => {
+                if (w.id !== window.id) return w;
+                return {
+                    ...w,
+                    ...newWindowOptions
+                };
+            })
+        };
+    }));
 }
 
 const taskbarReducer = (state: Taskbar | undefined, action: TaskbarAction): Taskbar => {
@@ -121,6 +112,7 @@ const taskbarReducer = (state: Taskbar | undefined, action: TaskbarAction): Task
                 isMinimized: action.payload.isMinimized
             });
         case TaskbarActionType.focusWindow:
+            if (action.payload.window.zIndex === Window.lastZIndex) return state;
             return getTaskbarWithChangedWindow(state, action.payload.window, {
                 zIndex: ++Window.lastZIndex
             });

@@ -10,13 +10,17 @@ export default class Rectangle implements IRectangle {
         public size: ISize) {
     }
 
-    get style() {
+    static getStyle(rectangle: IRectangle) {
         return {
-            left: this.point.x,
-            top: this.point.y,
-            width: this.size.width,
-            height: this.size.height
+            left: rectangle.point.x,
+            top: rectangle.point.y,
+            width: rectangle.size.width,
+            height: rectangle.size.height
         };
+    }
+
+    get style() {
+        return Rectangle.getStyle(this);
     }
 
     static get defaultWindowRectangle(): Rectangle {

@@ -8,7 +8,7 @@ import WindowComponent from "../WindowComponent/WindowComponent";
 const DesktopEnvironment: FC<HTMLProps<HTMLDivElement>> =
     ({children, className, style, ...props}) => {
         const taskbar = useAppSelector(state => state.taskbar);
-        const windows = useAppSelector(state => state.taskbar.items.flatMap(item => item.windows));
+        const windows = useAppSelector(state => state.taskbar.getWindows());
 
         return (
             <div className={["de", className].join(" ").trim()}

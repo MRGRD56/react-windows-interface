@@ -3,6 +3,7 @@ import {ReactNode} from "react";
 import IRectangle from "../2d/IRectangle";
 import Rectangle from "../2d/Rectangle";
 import Program from "./Program";
+import ISize from "../2d/ISize";
 
 export default class Window implements IWindow {
     private static lastId = 0;
@@ -18,6 +19,7 @@ export default class Window implements IWindow {
         public readonly program: Program,
         public content?: ReactNode,
         public rectangle: IRectangle = Rectangle.defaultWindowRectangle,
+        public minSize?: ISize,
         public iconSrc?: string,
         id?: number
     ) {
