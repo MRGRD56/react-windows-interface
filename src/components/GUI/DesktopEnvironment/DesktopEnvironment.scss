@@ -1,3 +1,9 @@
 .de {
+    position: relative;
     background: no-repeat center center / cover fixed;
+
+    .taskbar {
+        position: fixed;
+        bottom: 0;
+    }
 }

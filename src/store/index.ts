@@ -3,7 +3,7 @@ import taskbarReducer from "./taskbar/taskbarReducer";
 import * as TaskbarActionCreators from "./taskbar/actionCreators";
 
 const store = createStore(combineReducers({
-    taskbarReducer
+    taskbar: taskbarReducer
 }));
 
 export default store;

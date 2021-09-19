@@ -2,6 +2,7 @@ import Taskbar from "../../models/store/windows/Taskbar";
 import TaskbarAction from "../../models/store/windows/TaskbarAction";
 import TaskbarActionType from "../../models/store/windows/TaskbarActionType";
 import explorerPng from "../../assets/img/programs/explorer.png";
+import calcPng from "../../assets/img/programs/calc.png";
 import Window from "../../models/windows/Window";
 import Program from "../../models/windows/Program";
 import {List} from "immutable";
@@ -10,18 +11,23 @@ import TaskbarItem from "../../models/windows/TaskbarItem";
 import File from "../../models/windows/File";
 import IRectangle from "../../models/2d/IRectangle";
 
+function createTaskbarItem(fileName: string, iconSrc: string, windowTitle: string, program: Program): TaskbarItem {
+    return {
+        file: {
+            name: fileName,
+            iconSrc: iconSrc,
+            getWindow: () => new Window(windowTitle, program),
+            program: program
+        },
+        windows: List([]),
+        isPinned: true
+    };
+}
+
 const defaultState: Taskbar = {
     items: List([
-        {
-            file: {
-                name: "explorer.exe",
-                iconSrc: explorerPng,
-                getWindow: () => new Window("Explorer", Program.explorer),
-                program: Program.explorer
-            },
-            windows: List([]),
-            isPinned: true
-        }
+        createTaskbarItem("explorer.exe", explorerPng, "Explorer", Program.explorer),
+        createTaskbarItem("calc.exe", calcPng, "Calculator", Program.calc),
     ])
 };
 
