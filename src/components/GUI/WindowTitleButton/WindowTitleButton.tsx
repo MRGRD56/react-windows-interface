@@ -7,12 +7,11 @@ interface Props {
     onClick?: MouseEventHandler
 }
 
-function WindowTitleButton({children, isCloseButton, onClick, ...props}: Props) {
-    return (
-        <button className={"window-title-btn unselectable" + (isCloseButton ? " win-close-btn" : "")} onClick={onClick} {...props}>
-            {children}
-        </button>
-    );
-}
+const WindowTitleButton = ({children, isCloseButton, onClick, ...props}: Props) => (
+    <button className={"window-title-btn unselectable" + (isCloseButton ? " win-close-btn" : "")}
+        onClick={onClick} {...props}>
+        {children}
+    </button>
+);
 
 export default WindowTitleButton;

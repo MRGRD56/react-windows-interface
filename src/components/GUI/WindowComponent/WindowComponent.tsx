@@ -8,7 +8,6 @@ import Size from "../../../models/2d/Size";
 import useActions from "../../../hooks/useActions";
 import Point from "../../../models/2d/Point";
 import Side from "../../../models/2d/Side";
-import { SwitchTransition, CSSTransition } from "react-transition-group";
 import "./WindowComponent.scss";
 
 interface Props {
@@ -29,20 +28,6 @@ const WindowComponent = (props: Props) => {
 
     function toggleIsMaximized() {
         maximizeWindow(currentWindow, !currentWindow.isMaximized);
-        // const newState = {
-        //     ...state,
-        //     isAnimatedShort: true,
-        //     isMaximized: state.isMaximized !== true
-        // };
-        // setState(newState);
-        // windowInfo.isMaximized = newState.isMaximized; //FIXME
-        // setTimeout(() => {
-        //     setState({
-        //         ...newState,
-        //         isAnimatedShort: false
-        //     });
-        //     maximizeFunction?.(newState.isMaximized);
-        // }, 75);
     }
 
     const onDrag = (e: any) => {
@@ -51,7 +36,7 @@ const WindowComponent = (props: Props) => {
             new Point(currentWindow.rectangle.point.x + x, currentWindow.rectangle.point.y + y),
             currentWindow.rectangle.size);
         moveWindow(currentWindow, newRectangle);
-        //setRectangle(newRectangle);
+
         if (currentWindow.isMaximized) {
             const titleButtonsWidth = 138;
             const draggableAreaWidth = currentWindow.rectangle.size.width - titleButtonsWidth - 10;
@@ -61,14 +46,6 @@ const WindowComponent = (props: Props) => {
                 currentWindow.rectangle.size);
             moveWindow(currentWindow, newRectangle);
             maximizeWindow(currentWindow, false);
-            // setRectangle(newRectangle);
-            // setState({
-            //     ...state,
-            //     isMaximized: false
-            // });
-            // windowInfo.isMaximized = false; //FIXME
-            // windowInfo.rectangle = newRectangle; //FIXME
-            // maximizeFunction?.(false);
         }
     };
 
@@ -79,8 +56,6 @@ const WindowComponent = (props: Props) => {
         if (currentWindow.rectangle.point.y < 0) {
             const newRectangle = new Rectangle(new Point(currentWindow.rectangle.point.x, 0), currentWindow.rectangle.size);
             moveWindow(currentWindow, newRectangle);
-            // setRectangle(newRectangle);
-            // windowInfo.rectangle = newRectangle; //FIXME
         }
     };
 
@@ -156,8 +131,6 @@ const WindowComponent = (props: Props) => {
         // }
 
         moveWindow(currentWindow, newRectangle);
-        // setRectangle(newRectangle);
-        // windowInfo.rectangle = newRectangle; //FIXME
     }
 
     const isResizing = useRef(false);
@@ -177,8 +150,6 @@ const WindowComponent = (props: Props) => {
                     currentWindow.rectangle.size.width,
                     currentWindow.rectangle.size.height + currentWindow.rectangle.point.y));
             moveWindow(currentWindow, newRectangle);
-            // setRectangle(newRectangle);
-            // windowInfo.rectangle = newRectangle; //FIXME
         }
         if (currentWindow.rectangle.size.width < getMinSize().width
             || currentWindow.rectangle.size.height < getMinSize().height) {
@@ -189,8 +160,6 @@ const WindowComponent = (props: Props) => {
                     Math.max(currentWindow.rectangle.size.height, getMinSize().height))
             );
             moveWindow(currentWindow, newRectangle);
-            // setRectangle(newRectangle);
-            // windowInfo.rectangle = newRectangle; //FIXME
         }
     }
 
@@ -200,40 +169,10 @@ const WindowComponent = (props: Props) => {
 
     function onCloseClick() {
         closeWindow(currentWindow);
-        // const newState = {
-        //     ...state,
-        //     isAnimatedShort: true,
-        //     isClosing: true
-        // };
-        // setState(newState);
-        // setTimeout(() => {
-        //     setState({
-        //         ...newState,
-        //         isClosing: false,
-        //         isClosed: true,
-        //         isAnimatedShort: false
-        //     });
-        //     //closeFunction?.();
-        //     windowInfo.close(); //FIXME
-        // }, 75);
     }
 
     function onMinimizeClick() {
         minimizeWindow(currentWindow, !currentWindow.isMinimized);
-        // const newState = {
-        //     ...state,
-        //     isMinimized: true,
-        //     isAnimatedNormal: true
-        // };
-        // setState(newState);
-        // windowInfo.isMinimized = true; //FIXME
-        // minimizeFunction?.(true);
-        // setTimeout(() => {
-        //     setState({
-        //         ...newState,
-        //         isAnimatedNormal: false
-        //     });
-        // }, 500);
     }
 
     function getMinSize(): Size {

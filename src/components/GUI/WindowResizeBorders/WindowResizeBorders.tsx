@@ -10,7 +10,7 @@ interface Props {
     onResizeStop?: DraggableEventHandler
 }
 
-function WindowResizeBorders({onResize, onResizeStart, onResizeStop}: Props) {
+const WindowResizeBorders = ({onResize, onResizeStart, onResizeStop}: Props) => {
     const resizeBorders = [
         {
             sideString: "t",
@@ -56,6 +56,6 @@ function WindowResizeBorders({onResize, onResizeStart, onResizeStop}: Props) {
             ))}
         </div>
     );
-}
+};
 
 export default WindowResizeBorders;
