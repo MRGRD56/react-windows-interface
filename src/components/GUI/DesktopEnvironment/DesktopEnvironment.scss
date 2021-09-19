@@ -34,4 +34,28 @@
         opacity: 0;
         transform: scale(0.7);
     }
+
+    .window-maximizing-enter,
+    .window-maximizing-exit {
+        transition: 50ms ease-in;
+        transition-property: width, height, top, right, bottom, left;
+        pointer-events: none;
+    }
+
+    .window-minimizing-enter,
+    .window-minimizing-exit {
+        transition: 400ms ease-in;
+        transition-property: opacity, width, height, min-width, min-height, top, right, bottom, left, transform;
+        pointer-events: none;
+    }
+    //
+    //.window-minimizing-enter-active {
+    //
+    //    opacity: 0;
+    //    top: 100% !important;
+    //    transform: scale(0.01);
+    //    min-width: 50px !important;
+    //    min-height: 50px !important;
+    //
+    //}
 }

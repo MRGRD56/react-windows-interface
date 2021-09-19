@@ -18,7 +18,11 @@ const DesktopEnvironment: FC<HTMLProps<HTMLDivElement>> =
                     <TransitionGroup>
                         {windows.map(w => (
                             <CSSTransition key={w.id} classNames="window-transition" timeout={50}>
-                                <WindowComponent window={w}/>
+                                <CSSTransition classNames="window-maximizing" timeout={50} in={w.isMaximized}>
+                                    <CSSTransition classNames="window-minimizing" timeout={400} in={w.isMinimized}>
+                                        <WindowComponent window={w}/>
+                                    </CSSTransition>
+                                </CSSTransition>
                             </CSSTransition>
                         ))}
                     </TransitionGroup>

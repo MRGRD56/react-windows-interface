@@ -48,10 +48,11 @@
 
     &.minimized {
         opacity: 0;
-        top: 100% !important;
-        transform: scale(0.01);
-        min-width: 50px !important;
-        min-height: 50px !important;
+        top: calc(100% - 40px) !important;
+        left: 100px !important;
+        transform: scale(0.002);
+        min-width: 48px !important;
+        min-height: 40px !important;
         pointer-events: none;
     }
 
