@@ -15,9 +15,9 @@ interface Props {
     focusedWindow: IWindow | null
 }
 
-const WindowComponent = (props: Props) => {
-    const currentWindow = useMemo(() => props.window, [props.window]);
-    const isFocused = useMemo(() => currentWindow === props.focusedWindow, [currentWindow, props.focusedWindow]);
+const WindowComponent = ({window, focusedWindow, ...props}: Props) => {
+    const currentWindow = useMemo(() => window, [window]);
+    const isFocused = useMemo(() => currentWindow === focusedWindow, [currentWindow, focusedWindow]);
 
     const {
         closeWindow,
@@ -178,27 +178,27 @@ const WindowComponent = (props: Props) => {
     }
 
     function getMinSize(): Size {
-        return new Size(Math.max(props.window.minSize?.width ?? 0, 146), Math.max(props.window.minSize?.height ?? 0, 32));
+        return new Size(Math.max(window.minSize?.width ?? 0, 146), Math.max(window.minSize?.height ?? 0, 32));
     }
 
     return (
         <div {...props}
             className={classes({
                 "active acrylic": () => isFocused,
-                "maximized": () => props.window.isMaximized,
-                "minimized": () => props.window.isMinimized,
+                "maximized": () => window.isMaximized,
+                "minimized": () => window.isMinimized,
                 "animated-short": () => false,
                 "animated-normal": () => false,
                 "closing": () => false
             }, "window")}
-            style={{...Rectangle.getStyle(props.window.rectangle), minWidth: getMinSize().width,
-                minHeight: getMinSize().height, zIndex: props.window.zIndex}}
+            style={{...Rectangle.getStyle(window.rectangle), minWidth: getMinSize().width,
+                minHeight: getMinSize().height, zIndex: window.zIndex}}
             onMouseDown={onMouseDown}>
             <WindowResizeBorders onResize={onResize} onResizeStart={onResizeStart} onResizeStop={onResizeStop}/>
             <WindowTitle window={currentWindow} onDrag={onDrag} onDragStop={onDragStop}
                 onMinimizeClick={onMinimizeClick} onMaximizeClick={toggleIsMaximized} onCloseClick={onCloseClick}/>
             <div className="window-content">
-                {props.window.content}
+                {window.content}
             </div>
         </div>
     );
