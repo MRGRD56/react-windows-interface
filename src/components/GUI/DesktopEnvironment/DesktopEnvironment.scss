@@ -1,3 +1,5 @@
+@import "../../../styles/shared";
+
 .de {
     position: relative;
     background: no-repeat center center / cover fixed;
@@ -6,7 +8,7 @@
     .taskbar {
         position: fixed;
         bottom: 0;
-        z-index: 2147483647;
+        z-index: $z-index-max;
     }
 
     .window-transition-enter {

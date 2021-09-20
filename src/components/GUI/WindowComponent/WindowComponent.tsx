@@ -11,11 +11,13 @@ import Side from "../../../models/2d/Side";
 import "./WindowComponent.scss";
 
 interface Props {
-    window: IWindow
+    window: IWindow,
+    focusedWindow: IWindow | null
 }
 
 const WindowComponent = (props: Props) => {
     const currentWindow = useMemo(() => props.window, [props.window]);
+    const isFocused = useMemo(() => currentWindow === props.focusedWindow, [currentWindow, props.focusedWindow]);
 
     const {
         closeWindow,
@@ -182,7 +184,7 @@ const WindowComponent = (props: Props) => {
     return (
         <div {...props}
             className={classes({
-                "acrylic": () => true,
+                "active acrylic": () => isFocused,
                 "maximized": () => props.window.isMaximized,
                 "minimized": () => props.window.isMinimized,
                 "animated-short": () => false,

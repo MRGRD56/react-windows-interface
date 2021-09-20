@@ -1,4 +1,4 @@
-import React, {FC, HTMLProps} from "react";
+import React, {FC, HTMLProps, useMemo} from "react";
 import bg from "../../../assets/img/wallpapers/img19.jpg";
 import "./DesktopEnvironment.scss";
 import useAppSelector from "../../../hooks/useAppSelector";
@@ -10,6 +10,7 @@ const DesktopEnvironment: FC<HTMLProps<HTMLDivElement>> =
     ({children, className, style, ...props}) => {
         const taskbar = useAppSelector(state => state.taskbar);
         const windows = useAppSelector(state => state.taskbar.getWindows());
+        const focusedWindow = useMemo(() => taskbar.getFocusedWindow(), [taskbar.items])
 
         return (
             <div className={["de", className].join(" ").trim()}
@@ -20,7 +21,7 @@ const DesktopEnvironment: FC<HTMLProps<HTMLDivElement>> =
                             <CSSTransition key={w.id} classNames="window-transition" timeout={50}>
                                 <CSSTransition classNames="window-maximizing" timeout={50} in={w.isMaximized}>
                                     <CSSTransition classNames="window-minimizing" timeout={400} in={w.isMinimized}>
-                                        <WindowComponent window={w}/>
+                                        <WindowComponent window={w} focusedWindow={focusedWindow}/>
                                     </CSSTransition>
                                 </CSSTransition>
                             </CSSTransition>

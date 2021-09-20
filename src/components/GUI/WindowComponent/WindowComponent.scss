@@ -1,12 +1,14 @@
 .window {
     background: rgb(231, 231, 231);
     color: black;
-    border: 1px solid #363c3f;
+    border: 1px solid #657185;
     font-family: "Roboto", sans-serif;
     box-shadow: 0 0 10px 5px rgba(34, 60, 80, 0.2);
     display: flex;
     flex-direction: column;
     position: absolute;
+    transition: 0.2s ease-in;
+    transition-property: background, backdrop-filter;
 
     &.animated-short {
         transition: width 0.075s, height 0.075s, left 0.075s, top 0.075s, opacity 0.075s, transform 0.075s;
@@ -21,8 +23,11 @@
     }
 
     &.acrylic {
-        backdrop-filter: blur(25px);
         background: rgba(231, 231, 231, .75);
+    }
+
+    &.active {
+        border-color: #363c3f;
     }
 
     &.maximized {
