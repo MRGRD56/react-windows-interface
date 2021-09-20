@@ -1,5 +1,6 @@
 @import "../../../styles/shared";
 @import "../../../styles/OS";
+@import "../../../App";
 
 .taskbar {
     height: 40px;
@@ -37,7 +38,8 @@
         }
     }
 
-    .taskbar-left {
+    .taskbar-left,
+    .taskbar-right {
         display: flex;
     }
 
@@ -136,6 +138,40 @@
             .taskbar-item-start-icon {
                 filter: $cf-os-color;
             }
+        }
+    }
+
+    .tray-item {
+        @include button-zero;
+        @extend .unselectable;
+
+        color: white;
+        height: 100%;
+        width: auto;
+        padding: 0 5px;
+        font-family: "Roboto", sans-serif;
+        font-size: 13px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:hover {
+            background: #2f3038;
+        }
+
+        &.acrylic:hover {
+            background: rgba(49, 66, 80, 0.75);
+        }
+
+        &.tray-item-minimize-all {
+            box-shadow: inset 1px 0 0 0 rgba(#5d5f5f, 0.8);
+            width: 5px;
+            margin-left: 8px;
+        }
+
+        .tray-item-icon {
+            width: 16px;
+            height: 16px;
         }
     }
 }

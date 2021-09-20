@@ -3,10 +3,11 @@ import Taskbar from "../../../models/store/windows/Taskbar";
 import "./TaskbarComponent.scss";
 import startIcon from "../../../assets/img/OS/system_start.svg";
 import searchIcon from "../../../assets/img/OS/system_search.svg";
+import trayWifiIcon from "../../../assets/img/OS/system_tray_wifi.svg";
+import traySoundIcon from "../../../assets/img/OS/system_tray_sound.svg";
 import useActions from "../../../hooks/useActions";
 import {classes} from "mg-values";
-import Clock from "react-live-clock";
-import moment from "moment";
+import Clock from "../Clock/Clock";
 
 interface Props {
     taskbar: Taskbar
@@ -39,11 +40,19 @@ const TaskbarComponent = ({taskbar, ...props}: Props) => {
                 ))}
             </div>
             <div className="taskbar-right">
-                <button className="taskbar-item">
-                    {/*<Clock format="HH:mm" timezone={moment..guess()}/>*/}
-                    12:00
-                    20.09.2021
+                <button className="tray-item">
+                    <img className="unselectable tray-item-icon" src={traySoundIcon}/>
                 </button>
+                <button className="tray-item">
+                    <img className="unselectable tray-item-icon" src={trayWifiIcon}/>
+                </button>
+                <button className="tray-item">
+                    ENG
+                </button>
+                <button className="tray-item">
+                    <Clock style={{textAlign: "center"}} format="HH:mm[\n]yyyy-MM-DD"/>
+                </button>
+                <button className="tray-item tray-item-minimize-all"/>
             </div>
         </div>
     );
