@@ -8,35 +8,49 @@
     background: #25262c;
     display: flex;
     justify-content: space-between;
+    background: rgba(#25262c, 0.75);
 
-    &.acrylic {
-        background: rgba(#25262c, 0.75);
-
-        .taskbar-item {
-            &.taskbar-item-active {
-                background: rgba(66, 82, 88, 0.75) !important;
-
-                &::after {
-                    width: 100%;
-                }
-
-                &.taskbar-item-open-multiple::after {
-                    background: linear-gradient(90deg,
-                            rgba(118, 185, 237, 1) 0%, rgba(118, 185, 237, 1) 89%,
-                            rgba(71, 111, 142, 1) 89%, rgba(71, 111, 142, 1) 91%,
-                            rgba(94, 148, 190, 1) 91%, rgba(94, 148, 190, 1) 100%);
-                }
-
-                &:hover {
-                    background: rgba(#4e6067, 0.75) !important;
-                }
-            }
-
-            &:hover {
-                background: rgba(49, 66, 80, 0.75);
-            }
-        }
-    }
+    //&.acrylic {
+    //    background: rgba(#25262c, 0.75);
+    //
+    //    .taskbar-item {
+    //        &:hover {
+    //            background: rgba(49, 66, 80, 0.75);
+    //        }
+    //
+    //        &.taskbar-item-active {
+    //            background: rgba(66, 82, 88, 0.75) !important;
+    //
+    //            &::after {
+    //                width: 100%;
+    //            }
+    //
+    //            &:hover {
+    //                background: rgba(#4e6067, 0.75) !important;
+    //            }
+    //
+    //            &.taskbar-item-open-multiple {
+    //                &::after {
+    //                    background: linear-gradient(90deg,
+    //                            rgba(118, 185, 237, 0.75) 0%, rgba(118, 185, 237, 0.75) 89%,
+    //                            rgba(71, 111, 142, 0.75) 89%, rgba(71, 111, 142, 0.75) 91%,
+    //                            rgba(94, 148, 190, 0.75) 91%, rgba(94, 148, 190, 0.75) 100%);
+    //                }
+    //
+    //
+    //            }
+    //        }
+    //
+    //        &.taskbar-item-open-multiple {
+    //            &:hover {
+    //                background: linear-gradient(90deg,
+    //                        rgba(78, 96, 103, 0.75) 0%, rgba(78, 96, 103, 0.75) 87%,
+    //                        #212d32 87%, #212d32 89%,
+    //                        rgba(53, 63, 68, 0.75) 89%, rgba(53, 63, 68, 0.75) 100%) !important;
+    //            }
+    //        }
+    //    }
+    //}
 
     .taskbar-left,
     .taskbar-right {

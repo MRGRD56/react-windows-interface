@@ -136,12 +136,6 @@ function getTaskbarWithHandledClick(taskbar: Taskbar, item: TaskbarItem): Taskba
     return getTaskbarWithOpenWindowsPanel(taskbar, item);
 }
 
-function getTaskbarWithMinimizedWindow(taskbar: Taskbar, window: IWindow, isMinimized: boolean): Taskbar {
-    return getTaskbarWithChangedWindow(taskbar, window, {
-        isMinimized
-    });
-}
-
 const taskbarReducer = (state: Taskbar | undefined, action: TaskbarAction): Taskbar => {
     if (!state) return defaultState;
 
@@ -157,7 +151,9 @@ const taskbarReducer = (state: Taskbar | undefined, action: TaskbarAction): Task
                 isMaximized: action.payload.isMaximized
             });
         case TaskbarActionType.minimizeWindow:
-            return getTaskbarWithMinimizedWindow(state, action.payload.window, action.payload.isMinimized);
+            return getTaskbarWithChangedWindow(state, action.payload.window, {
+                isMinimized: action.payload.isMinimized
+            });
         case TaskbarActionType.focusWindow:
             if (action.payload.window.zIndex === Window.lastZIndex) return state;
             return getTaskbarWithChangedWindow(state, action.payload.window, {
