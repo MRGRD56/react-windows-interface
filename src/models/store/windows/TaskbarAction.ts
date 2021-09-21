@@ -14,6 +14,9 @@ type MoveWindowAction = AppAction<TaskbarActionType.moveWindow, {window: IWindow
 type ClickTaskbarItemAction = AppAction<TaskbarActionType.clickTaskbarItem, {taskbarItem: TaskbarItem}>;
 type ShowTaskbarWindowsPanelAction = AppAction<TaskbarActionType.showTaskbarWindowsPanel, {taskbarItem: TaskbarItem | null}>;
 type ShowTaskbarContextMenuAction = AppAction<TaskbarActionType.showTaskbarContextMenu, {taskbarItem: TaskbarItem | null}>;
+type PinTaskbarItemAction = AppAction<TaskbarActionType.pinTaskbarItem, {taskbarItem: TaskbarItem, isPinned: boolean}>;
+type ClosePopupsAction = AppAction<TaskbarActionType.closePopups, null>;
+type CloseTaskbarItemAction = AppAction<TaskbarActionType.closeTaskbarItem, {taskbarItem: TaskbarItem}>;
 
 type TaskbarAction =
     OpenNewWindowAction |
@@ -24,6 +27,9 @@ type TaskbarAction =
     MoveWindowAction |
     ClickTaskbarItemAction |
     ShowTaskbarWindowsPanelAction |
-    ShowTaskbarContextMenuAction;
+    ShowTaskbarContextMenuAction |
+    PinTaskbarItemAction |
+    ClosePopupsAction |
+    CloseTaskbarItemAction;
 
 export default TaskbarAction;

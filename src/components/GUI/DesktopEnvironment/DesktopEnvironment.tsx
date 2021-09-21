@@ -1,20 +1,27 @@
-import React, {FC, HTMLProps, useMemo} from "react";
+import React, {FC, HTMLProps, MouseEventHandler, useMemo} from "react";
 import bg from "../../../assets/img/wallpapers/img19.jpg";
 import "./DesktopEnvironment.scss";
 import useAppSelector from "../../../hooks/useAppSelector";
 import TaskbarComponent from "../TaskbarComponent/TaskbarComponent";
 import WindowComponent from "../WindowComponent/WindowComponent";
 import {CSSTransition, TransitionGroup} from "react-transition-group";
+import useActions from "../../../hooks/useActions";
 
 const DesktopEnvironment: FC<HTMLProps<HTMLDivElement>> =
     ({children, className, style, ...props}) => {
         const taskbar = useAppSelector(state => state.taskbar);
         const windows = useAppSelector(state => state.taskbar.getWindows());
         const focusedWindow = useMemo(() => taskbar.getFocusedWindow(), [taskbar.items])
+        const {closePopups} = useActions();
+
+        const onMouseDown: MouseEventHandler<HTMLDivElement> = e => {
+            closePopups();
+        };
 
         return (
             <div className={["de", className].join(" ").trim()}
-                style={{backgroundImage: `url(${bg})`, ...style}} {...props}>
+                style={{backgroundImage: `url(${bg})`, ...style}} {...props}
+                onMouseDown={onMouseDown}>
                 <div className="windows-wrapper">
                     <TransitionGroup>
                         {windows.map(w => (

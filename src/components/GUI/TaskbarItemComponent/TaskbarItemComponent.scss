@@ -76,7 +76,7 @@
         }
     }
 
-    &:hover {
+    &.hover, &:hover {
         background-color: rgba(49, 66, 80, $acrylic-alpha);
 
         &::after {
@@ -96,7 +96,7 @@
                     rgba(94, 148, 190, 1) 79%, rgba(94, 148, 190, 1) 100%);
         }
 
-        &:hover {
+        &.hover, &:hover {
             background-image: linear-gradient(90deg,
                     rgba(49, 66, 80, $acrylic-alpha) 0%, rgba(49, 66, 80, $acrylic-alpha) 87%,
                     rgba(33, 45, 50, $acrylic-alpha) 87%, rgba(33, 45, 50, $acrylic-alpha) 89%,
@@ -118,7 +118,7 @@
             width: calc(100% - 1px);
         }
 
-        &:hover {
+        &.hover, &:hover {
             background-color: rgba(#4e6067, $acrylic-alpha);
         }
 
@@ -128,7 +128,7 @@
                     #212d32 87%, #212d32 89%,
                     rgba(53, 63, 68, $acrylic-alpha) 91%, rgba(53, 63, 68, $acrylic-alpha) 100%);
 
-            &:hover {
+            &.hover, &:hover {
                 background-image: linear-gradient(90deg,
                         rgba(78, 96, 103, $acrylic-alpha) 0%, rgba(78, 96, 103, $acrylic-alpha) 87%,
                         rgba(33, 45, 50, $acrylic-alpha) 87%, rgba(33, 45, 50, $acrylic-alpha) 89%,
@@ -143,4 +143,19 @@
             }
         }
     }
+}
+
+.taskbar-item-context-menu-enter {
+    transition: 100ms ease-out;
+    transition-property: bottom, transform, opacity;
+    bottom: 20px !important;
+    opacity: 0;
+    transform: scaleY(0.8);
+}
+
+.taskbar-item-context-menu-enter-active {
+    bottom: 40px !important;
+    pointer-events: none;
+    transform: scaleY(1);
+    opacity: 1;
 }

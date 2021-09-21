@@ -4,6 +4,7 @@ import {classes} from "mg-values/index";
 import useActions from "../../../hooks/useActions";
 import "./TaskbarItemComponent.scss";
 import TaskbarItemContextMenu from "../TaskbarItemContextMenu/TaskbarItemContextMenu";
+import {CSSTransition} from "react-transition-group";
 
 interface Props {
     item: TaskbarItem,
@@ -26,11 +27,14 @@ const TaskbarItemComponent: FC<Props> = ({item, activeItem, ...props}) => {
 
     return (
         <div className="taskbar-item-wrapper">
-            <TaskbarItemContextMenu taskbarItem={item}/>
+            <CSSTransition timeout={100} in={item.isContextMenuShown} classNames="taskbar-item-context-menu">
+                <TaskbarItemContextMenu taskbarItem={item}/>
+            </CSSTransition>
             <button key={item.file.name} className={classes({
                 "taskbar-item-open": () => item.windows.size === 1,
                 "taskbar-item-open-multiple": () => item.windows.size > 1,
-                "taskbar-item-active": () => item === activeItem
+                "taskbar-item-active": () => item === activeItem,
+                "hover": () => item.isContextMenuShown === true
             }, "taskbar-item")}
             onClick={() => clickTaskbarItem(item)} onAuxClick={onAuxClick}
             onContextMenu={onContextMenu}>

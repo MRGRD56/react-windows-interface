@@ -83,7 +83,7 @@ function getTaskbarWithoutWindow(taskbar: Taskbar, window: IWindow): Taskbar {
     return new Taskbar(items);
 }
 
-type WindowOptions = {
+interface WindowOptions {
     isMaximized?: boolean,
     isMinimized?: boolean,
     rectangle?: IRectangle,
@@ -145,6 +145,58 @@ function getTaskbarWithShownContextMenu(taskbar: Taskbar, item: TaskbarItem | nu
     }));
 }
 
+interface TaskbarItemOptions {
+    isPinned?: boolean;
+}
+
+function getTaskbarWithChangedItem(taskbar: Taskbar, item: TaskbarItem, newItemOptions: TaskbarItemOptions): Taskbar {
+    return new Taskbar(taskbar.items.map(it => {
+        if (it !== item) return it;
+        return {
+            ...it,
+            ...newItemOptions
+        }
+    }));
+}
+
+function getTaskbarWithPinnedItem(taskbar: Taskbar, item: TaskbarItem, isPinned: boolean): Taskbar {
+    const isToDelete = !isPinned && !item.windows.size;
+
+    if (isToDelete) {
+        return getTaskbarWithoutItem(taskbar, item);
+    }
+
+    return getTaskbarWithChangedItem(taskbar, item, {isPinned});
+}
+
+function getTaskbarWithClosedPopups(taskbar: Taskbar): Taskbar {
+    return new Taskbar(taskbar.items.map(it => {
+        return {
+            ...it,
+            isWindowsPanelShown: false,
+            isContextMenuShown: false
+        }
+    }));
+}
+
+function getTaskbarWithoutItem(taskbar: Taskbar, item: TaskbarItem): Taskbar {
+    return new Taskbar(taskbar.items.filter(it => it !== item));
+}
+
+function getTaskbarWithClosedItem(taskbar: Taskbar, taskbarItem: TaskbarItem): Taskbar {
+    if (taskbarItem.isPinned) {
+        return new Taskbar(taskbar.items.map(item => {
+            if (item !== taskbarItem) return item;
+            return {
+                ...item,
+                windows: List([])
+            }
+        }));
+    } else {
+        return getTaskbarWithoutItem(taskbar, taskbarItem);
+    }
+}
+
 const taskbarReducer = (state: Taskbar | undefined, action: TaskbarAction): Taskbar => {
     if (!state) return defaultState;
 
@@ -176,6 +228,12 @@ const taskbarReducer = (state: Taskbar | undefined, action: TaskbarAction): Task
             return getTaskbarWithShownWindowsPanel(state, action.payload.taskbarItem);
         case TaskbarActionType.showTaskbarContextMenu:
             return getTaskbarWithShownContextMenu(state, action.payload.taskbarItem);
+        case TaskbarActionType.pinTaskbarItem:
+            return getTaskbarWithPinnedItem(state, action.payload.taskbarItem, action.payload.isPinned);
+        case TaskbarActionType.closePopups:
+            return getTaskbarWithClosedPopups(state);
+        case TaskbarActionType.closeTaskbarItem:
+            return getTaskbarWithClosedItem(state, action.payload.taskbarItem);
         default:
             return state;
     }

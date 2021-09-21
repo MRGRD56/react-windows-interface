@@ -3,7 +3,7 @@
 .taskbar-item-context-menu {
     position: absolute;
     height: auto;
-    background-color: rgba(#101010, $acrylic-alpha);
+    background-color: rgba(#101010, 0.99);
     border: 1px solid #2b2b2b;
     bottom: 40px;
     color: white;
@@ -11,32 +11,4 @@
     box-shadow: 0 0 10px 5px rgba(34, 60, 80, 0.2);
     width: 256px;
     z-index: $z-index-max - 1;
-
-    .taskbar-item-context-menu-item {
-        @include button-zero;
-
-        height: 30px;
-        display: flex;
-        align-items: center;
-        flex-wrap: nowrap;
-        padding: 0 0 0 12px;
-        font-size: 14px;
-        width: 100%;
-        transition: ease-in 0.06s;
-        transition-property: background-color;
-
-        &:hover {
-            background-color: rgba(#515151, 0.6);
-        }
-
-        &:active {
-            background-color: rgba(#515151, 0.9);
-        }
-
-        .taskbar-item-context-menu-item-icon {
-            width: 16px;
-            height: 16px;
-            margin-right: 12px;
-        }
-    }
 }

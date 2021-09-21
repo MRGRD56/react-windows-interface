@@ -1,0 +1,46 @@
+@import "../../../styles/shared";
+
+.taskbar-item-context-menu-item {
+    @include button-zero;
+
+    height: 30px;
+    width: 100%;
+    transition: ease-in 0.06s;
+    transition-property: background-color;
+
+    .taskbar-item-context-menu-item-content {
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap;
+        padding: 0 0 0 12px;
+        font-size: 14px;
+    }
+
+    &:hover {
+        background-color: rgba(#515151, 0.6);
+    }
+
+    &:active {
+        background-color: rgba(#515151, 0.9);
+
+        .taskbar-item-context-menu-item-content {
+            transform: scale(0.98);
+        }
+    }
+
+    .taskbar-item-context-menu-item-icon-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        margin-right: 12px;
+        width: 16px;
+        height: 16px;
+    }
+
+    .taskbar-item-context-menu-item-icon {
+        &.single-color {
+            filter: $cf-white;
+        }
+    }
+}

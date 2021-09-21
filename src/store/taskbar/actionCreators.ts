@@ -54,16 +54,37 @@ export function clickTaskbarItem(taskbarItem: TaskbarItem): TaskbarAction {
     }
 }
 
-export function showTaskbarContextMenu(taskbarItem: TaskbarItem): TaskbarAction {
+export function showTaskbarContextMenu(taskbarItem: TaskbarItem | null): TaskbarAction {
     return {
         type: TaskbarActionType.showTaskbarContextMenu,
         payload: {taskbarItem}
     }
 }
 
-export function showTaskbarWindowsPanel(taskbarItem: TaskbarItem): TaskbarAction {
+export function showTaskbarWindowsPanel(taskbarItem: TaskbarItem | null): TaskbarAction {
     return {
         type: TaskbarActionType.showTaskbarWindowsPanel,
         payload: {taskbarItem}
+    }
+}
+
+export function pinTaskbarItem(taskbarItem: TaskbarItem, isPinned: boolean): TaskbarAction {
+    return {
+        type: TaskbarActionType.pinTaskbarItem,
+        payload: {taskbarItem, isPinned}
+    }
+}
+
+export function closeTaskbarItem(taskbarItem: TaskbarItem): TaskbarAction {
+    return {
+        type: TaskbarActionType.closeTaskbarItem,
+        payload: {taskbarItem}
+    }
+}
+
+export function closePopups(): TaskbarAction {
+    return {
+        type: TaskbarActionType.closePopups,
+        payload: null
     }
 }
