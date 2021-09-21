@@ -8,6 +8,7 @@ import traySoundIcon from "../../../assets/img/OS/system_tray_sound.svg";
 import useActions from "../../../hooks/useActions";
 import {classes} from "mg-values";
 import Clock from "../Clock/Clock";
+import TaskbarItemComponent from "../TaskbarItemComponent/TaskbarItemComponent";
 
 interface Props {
     taskbar: Taskbar
@@ -30,13 +31,7 @@ const TaskbarComponent = ({taskbar, ...props}: Props) => {
                 </button>
                 <div style={{height: "100%", width: "3px"}}/>
                 {taskbar.items.map(item => (
-                    <button key={item.file.name} className={classes({
-                        "taskbar-item-open": () => item.windows.size === 1,
-                        "taskbar-item-open-multiple": () => item.windows.size > 1,
-                        "taskbar-item-active": () => item === activeItem
-                    }, "taskbar-item")} onClick={() => openFile(item.file)}>
-                        <img className="unselectable taskbar-item-icon" src={item.file.iconSrc}/>
-                    </button>
+                    <TaskbarItemComponent key={item.file.program} item={item} activeItem={activeItem}/>
                 ))}
             </div>
             <div className="taskbar-right">
@@ -52,7 +47,7 @@ const TaskbarComponent = ({taskbar, ...props}: Props) => {
                 <button className="tray-item">
                     <Clock style={{textAlign: "center"}} format="HH:mm[\n]yyyy-MM-DD"/>
                 </button>
-                <button className="tray-item tray-item-minimize-all"/>
+                <button className="tray-item tray-item-show-desktop"/>
             </div>
         </div>
     );

@@ -1,0 +1,101 @@
+@import "../../../styles/shared";
+@import "../../../styles/OS";
+@import "../../../App";
+
+.taskbar-item {
+    @include button-zero;
+
+    width: 48px;
+    min-width: 48px;
+    max-width: 48px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background 0.15s;
+    position: relative;
+
+    &::after {
+        position: absolute;
+        bottom: 0;
+        content: "";
+        height: 2px;
+        width: calc(100% - 8px);
+        background: transparent;
+        transition: 0.07s ease-in;
+        transition-property: width, height, background;
+    }
+
+    .taskbar-item-content {
+        @include fullscreen;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &.taskbar-item-open {
+        &::after {
+            background: #76b9ed;
+        }
+
+        &.taskbar-item-active {
+            background: #4e6067;
+        }
+    }
+
+    &.taskbar-item-open-multiple {
+        &::after {
+            background: linear-gradient(90deg,
+                    rgba(118, 185, 237, 1) 0%, rgba(118, 185, 237, 1) 77%,
+                    rgba(71, 111, 142, 1) 77%, rgba(71, 111, 142, 1) 80%,
+                    rgba(94, 148, 190, 1) 80%, rgba(94, 148, 190, 1) 100%);
+        }
+
+        &:hover::after {
+            background: linear-gradient(90deg,
+                    rgba(118, 185, 237, 1) 0%, rgba(118, 185, 237, 1) 89%,
+                    rgba(71, 111, 142, 1) 89%, rgba(71, 111, 142, 1) 91%,
+                    rgba(94, 148, 190, 1) 91%, rgba(94, 148, 190, 1) 100%);
+        }
+    }
+
+    &:active {
+        background: #25282c;
+    }
+
+    &:focus-visible {
+        outline: none;
+    }
+
+    .taskbar-item-icon {
+        width: 24px;
+        height: 24px;
+        image-rendering: high-quality;
+
+        &.taskbar-item-system-icon {
+            width: 20px;
+            height: 20px;
+
+            &.taskbar-item-start-icon {
+                width: 19px;
+                height: 19px;
+            }
+        }
+
+        &.single-color {
+            filter: $cf-white;
+        }
+    }
+
+    &:hover {
+        background: #2f3038;
+
+        &::after {
+            width: calc(100% - 2px);
+        }
+
+        .taskbar-item-start-icon {
+            filter: $cf-os-color;
+        }
+    }
+}

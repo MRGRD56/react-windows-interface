@@ -83,11 +83,12 @@ function getTaskbarWithoutWindow(taskbar: Taskbar, window: IWindow): Taskbar {
     return new Taskbar(items);
 }
 
-type WindowOptions =
-    {isMaximized: boolean} |
-    {isMinimized: boolean} |
-    {rectangle: IRectangle} |
-    {zIndex: number};
+type WindowOptions = {
+    isMaximized?: boolean,
+    isMinimized?: boolean,
+    rectangle?: IRectangle,
+    zIndex?: number
+}
 
 function getTaskbarWithChangedWindow(taskbar: Taskbar, window: IWindow, newWindowOptions: WindowOptions): Taskbar {
     return new Taskbar(taskbar.items.map(item => {
@@ -104,10 +105,49 @@ function getTaskbarWithChangedWindow(taskbar: Taskbar, window: IWindow, newWindo
     }));
 }
 
+function getTaskbarWithOpenWindowsPanel(taskbar: Taskbar, item: TaskbarItem | null): Taskbar {
+    return new Taskbar(taskbar.items.map(it => {
+        return {
+            ...it,
+            isWindowsPanelOpen: item ? it === item : undefined
+        }
+    }));
+}
+
+function getTaskbarWithHandledClick(taskbar: Taskbar, item: TaskbarItem): Taskbar {
+    if (!item.windows.size) {
+        return getTaskbarWithFile(taskbar, item.file);
+    }
+
+    if (item.windows.size === 1) {
+        const window = item.windows.get(0)!;
+        if (window.id === taskbar.getFocusedWindow()?.id) {
+            return getTaskbarWithChangedWindow(taskbar, window, {
+                isMinimized: !window.isMinimized
+            });
+        } else {
+            return getTaskbarWithChangedWindow(taskbar, window, {
+                isMinimized: false,
+                zIndex: ++Window.lastZIndex
+            });
+        }
+    }
+
+    return getTaskbarWithOpenWindowsPanel(taskbar, item);
+}
+
+function getTaskbarWithMinimizedWindow(taskbar: Taskbar, window: IWindow, isMinimized: boolean): Taskbar {
+    return getTaskbarWithChangedWindow(taskbar, window, {
+        isMinimized
+    });
+}
+
 const taskbarReducer = (state: Taskbar | undefined, action: TaskbarAction): Taskbar => {
     if (!state) return defaultState;
 
     switch (action.type) {
+        case TaskbarActionType.clickTaskbarItem:
+            return getTaskbarWithHandledClick(state, action.payload.taskbarItem);
         case TaskbarActionType.openFile:
             return getTaskbarWithFile(state, action.payload.file);
         case TaskbarActionType.closeWindow:
@@ -117,9 +157,7 @@ const taskbarReducer = (state: Taskbar | undefined, action: TaskbarAction): Task
                 isMaximized: action.payload.isMaximized
             });
         case TaskbarActionType.minimizeWindow:
-            return getTaskbarWithChangedWindow(state, action.payload.window, {
-                isMinimized: action.payload.isMinimized
-            });
+            return getTaskbarWithMinimizedWindow(state, action.payload.window, action.payload.isMinimized);
         case TaskbarActionType.focusWindow:
             if (action.payload.window.zIndex === Window.lastZIndex) return state;
             return getTaskbarWithChangedWindow(state, action.payload.window, {
@@ -129,6 +167,8 @@ const taskbarReducer = (state: Taskbar | undefined, action: TaskbarAction): Task
             return getTaskbarWithChangedWindow(state, action.payload.window, {
                 rectangle: action.payload.rectangle
             });
+        case TaskbarActionType.showTaskbarWindowsPanel:
+            return getTaskbarWithOpenWindowsPanel(state, action.payload.taskbarItem);
         default:
             return state;
     }

@@ -13,12 +13,15 @@ export default class Taskbar {
     }
 
     getFocusedWindow(): IWindow | null {
-        return this.getWindows().maxBy(w => w.zIndex) ?? null;
+        return this.getWindows()
+            .filter(w => !w.isMinimized)
+            .maxBy(w => w.zIndex) ?? null;
     }
 
     getActiveItem(): TaskbarItem | null {
         const activeItem = this.items
             .maxBy(item => item.windows
+                .filter(w => !w.isMinimized)
                 .maxBy(w => w.zIndex)?.zIndex ?? -1);
         if (!activeItem) return null;
         const hasOpenWindows = activeItem.windows.some(w => !w.isMinimized);

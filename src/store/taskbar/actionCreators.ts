@@ -3,6 +3,7 @@ import TaskbarActionType from "../../models/store/windows/TaskbarActionType";
 import File from "../../models/windows/File";
 import IWindow from "../../models/windows/IWindow";
 import IRectangle from "../../models/2d/IRectangle";
+import TaskbarItem from "../../models/windows/TaskbarItem";
 
 export function openFile(file: File): TaskbarAction {
     return {
@@ -43,5 +44,12 @@ export function moveWindow(window: IWindow, rectangle: IRectangle): TaskbarActio
     return {
         type: TaskbarActionType.moveWindow,
         payload: {window, rectangle}
+    }
+}
+
+export function clickTaskbarItem(taskbarItem: TaskbarItem): TaskbarAction {
+    return {
+        type: TaskbarActionType.clickTaskbarItem,
+        payload: {taskbarItem}
     }
 }

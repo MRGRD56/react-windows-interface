@@ -46,7 +46,7 @@
 
     .window-minimizing-enter,
     .window-minimizing-exit {
-        transition: 400ms ease-in;
+        transition: 280ms ease-in;
         transition-property: opacity, width, height, min-width, min-height, top, right, bottom, left, transform;
         pointer-events: none;
     }
