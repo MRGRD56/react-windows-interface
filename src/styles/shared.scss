@@ -1,8 +1,11 @@
 $cf-white: invert(100%) sepia(100%) saturate(0%) hue-rotate(174deg) brightness(101%) contrast(103%);
 $cf-black: invert(0%) sepia(100%) saturate(0%) hue-rotate(87deg) brightness(103%) contrast(104%);
 $cf-os-color: invert(44%) sepia(70%) saturate(510%) hue-rotate(163deg) brightness(88%) contrast(101%);
+$cf-inactive: invert(71%) sepia(1%) saturate(0%) hue-rotate(144deg) brightness(86%) contrast(94%);
 
 $z-index-max: 2147483647;
+
+$acrylic-alpha: 0.75; //TODO: check the support of backdrop-filter
 
 @mixin fullscreen() {
     width: 100%;
@@ -41,4 +44,6 @@ $z-index-max: 2147483647;
     &:focus-visible {
         outline: none;
     }
+
+    font-family: "Roboto", sans-serif;
 }

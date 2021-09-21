@@ -7,6 +7,7 @@ enum TaskbarActionType {
     moveWindow = "MOVE_WINDOW",
     clickTaskbarItem = "CLICK_TASKBAR_ITEM",
     showTaskbarWindowsPanel = "SHOW_TASKBAR_WINDOWS_PANEL",
+    showTaskbarContextMenu = "SHOW_TASKBAR_CONTEXT_MENU"
 }
 
 export default TaskbarActionType;

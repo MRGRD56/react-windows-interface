@@ -13,6 +13,7 @@ type FocusWindowAction = AppAction<TaskbarActionType.focusWindow, {window: IWind
 type MoveWindowAction = AppAction<TaskbarActionType.moveWindow, {window: IWindow, rectangle: IRectangle}>;
 type ClickTaskbarItemAction = AppAction<TaskbarActionType.clickTaskbarItem, {taskbarItem: TaskbarItem}>;
 type ShowTaskbarWindowsPanelAction = AppAction<TaskbarActionType.showTaskbarWindowsPanel, {taskbarItem: TaskbarItem | null}>;
+type ShowTaskbarContextMenuAction = AppAction<TaskbarActionType.showTaskbarContextMenu, {taskbarItem: TaskbarItem | null}>;
 
 type TaskbarAction =
     OpenNewWindowAction |
@@ -22,6 +23,7 @@ type TaskbarAction =
     FocusWindowAction |
     MoveWindowAction |
     ClickTaskbarItemAction |
-    ShowTaskbarWindowsPanelAction;
+    ShowTaskbarWindowsPanelAction |
+    ShowTaskbarContextMenuAction;
 
 export default TaskbarAction;

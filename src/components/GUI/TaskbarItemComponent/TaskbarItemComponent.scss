@@ -2,17 +2,22 @@
 @import "../../../styles/OS";
 @import "../../../App";
 
+.taskbar-item-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
 .taskbar-item {
     @include button-zero;
 
-    width: 47px;
+    width: 49px;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     transition: background 0.15s;
     position: relative;
-    padding: 0 0 0 1px;
+    padding: 0 1px 0 0;
     background-clip: content-box;
 
     &::after {
@@ -20,7 +25,7 @@
         bottom: 0;
         content: "";
         height: 2px;
-        width: calc(100% - 8px);
+        width: calc(100% - 9px);
         background: transparent;
         transition: 0.07s ease-in;
         transition-property: width, height, background;
@@ -72,7 +77,7 @@
     }
 
     &:hover {
-        background-color: rgba(49, 66, 80, 0.75);
+        background-color: rgba(49, 66, 80, $acrylic-alpha);
 
         &::after {
             width: calc(100% - 1px);
@@ -87,15 +92,15 @@
         &::after {
             background-image: linear-gradient(90deg,
                     rgba(118, 185, 237, 1) 0%, rgba(118, 185, 237, 1) 77%,
-                    rgba(71, 111, 142, 1) 77%, rgba(71, 111, 142, 1) 80%,
-                    rgba(94, 148, 190, 1) 80%, rgba(94, 148, 190, 1) 100%);
+                    rgba(71, 111, 142, 1) 77%, rgba(71, 111, 142, 1) 79%,
+                    rgba(94, 148, 190, 1) 79%, rgba(94, 148, 190, 1) 100%);
         }
 
         &:hover {
             background-image: linear-gradient(90deg,
-                    rgba(49, 66, 80, 0.75) 0%, rgba(49, 66, 80, 0.75) 89%,
-                    #212d32 89%, #212d32 91%,
-                    rgba(53, 63, 68, 0.75) 91%, rgba(53, 63, 68, 0.75) 100%);
+                    rgba(49, 66, 80, $acrylic-alpha) 0%, rgba(49, 66, 80, $acrylic-alpha) 87%,
+                    rgba(33, 45, 50, $acrylic-alpha) 87%, rgba(33, 45, 50, $acrylic-alpha) 89%,
+                    rgba(50, 58, 63, $acrylic-alpha) 91%, rgba(50, 58, 63, $acrylic-alpha) 100%);
 
             &::after {
                 background-image: linear-gradient(90deg,
@@ -107,34 +112,34 @@
     }
 
     &.taskbar-item-active {
-        background-color: rgba(66, 82, 88, 0.75);
+        background-color: rgba(66, 82, 88, $acrylic-alpha);
 
         &::after {
             width: calc(100% - 1px);
         }
 
         &:hover {
-            background-color: rgba(#4e6067, 0.75);
+            background-color: rgba(#4e6067, $acrylic-alpha);
         }
 
         &.taskbar-item-open-multiple {
             background-image: linear-gradient(90deg,
-                    rgba(66, 82, 88, 0.75) 0%, rgba(66, 82, 88, 0.75) 89%,
-                    #212d32 89%, #212d32 91%,
-                    rgba(53, 63, 68, 0.75) 91%, rgba(53, 63, 68, 0.75) 100%);
+                    rgba(66, 82, 88, $acrylic-alpha) 0%, rgba(66, 82, 88, $acrylic-alpha) 87%,
+                    #212d32 87%, #212d32 89%,
+                    rgba(53, 63, 68, $acrylic-alpha) 91%, rgba(53, 63, 68, $acrylic-alpha) 100%);
 
             &:hover {
                 background-image: linear-gradient(90deg,
-                        rgba(78, 96, 103, 0.75) 0%, rgba(78, 96, 103, 0.75) 89%,
-                        #212d32 89%, #212d32 91%,
-                        rgba(53, 63, 68, 0.75) 91%, rgba(53, 63, 68, 0.75) 100%);
+                        rgba(78, 96, 103, $acrylic-alpha) 0%, rgba(78, 96, 103, $acrylic-alpha) 87%,
+                        rgba(33, 45, 50, $acrylic-alpha) 87%, rgba(33, 45, 50, $acrylic-alpha) 89%,
+                        rgba(53, 63, 68, $acrylic-alpha) 91%, rgba(53, 63, 68, $acrylic-alpha) 100%);
             }
 
             &::after {
                 background-image: linear-gradient(90deg,
-                        rgba(118, 185, 237, 0.75) 0%, rgba(118, 185, 237, 0.75) 89%,
-                        rgba(71, 111, 142, 0.75) 89%, rgba(71, 111, 142, 0.75) 91%,
-                        rgba(94, 148, 190, 0.75) 91%, rgba(94, 148, 190, 0.75) 100%);
+                        rgba(118, 185, 237, $acrylic-alpha) 0%, rgba(118, 185, 237, $acrylic-alpha) 89%,
+                        rgba(71, 111, 142, $acrylic-alpha) 89%, rgba(71, 111, 142, $acrylic-alpha) 91%,
+                        rgba(94, 148, 190, $acrylic-alpha) 91%, rgba(94, 148, 190, $acrylic-alpha) 100%);
             }
         }
     }

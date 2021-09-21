@@ -53,3 +53,17 @@ export function clickTaskbarItem(taskbarItem: TaskbarItem): TaskbarAction {
         payload: {taskbarItem}
     }
 }
+
+export function showTaskbarContextMenu(taskbarItem: TaskbarItem): TaskbarAction {
+    return {
+        type: TaskbarActionType.showTaskbarContextMenu,
+        payload: {taskbarItem}
+    }
+}
+
+export function showTaskbarWindowsPanel(taskbarItem: TaskbarItem): TaskbarAction {
+    return {
+        type: TaskbarActionType.showTaskbarWindowsPanel,
+        payload: {taskbarItem}
+    }
+}

@@ -6,5 +6,6 @@ export default interface TaskbarItem {
     file: File;
     windows: List<IWindow>;
     isPinned: boolean;
-    isWindowsPanelOpen?: boolean;
+    isWindowsPanelShown?: boolean;
+    isContextMenuShown?: boolean;
 }

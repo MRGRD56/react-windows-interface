@@ -6,6 +6,9 @@ button.window-title-btn {
     width: 46px;
     height: 32px;
     transition: background-color 0.2s, color 0.2s, filter 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     &>* {
         display: flex;
