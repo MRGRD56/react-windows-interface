@@ -223,7 +223,9 @@ const taskbarReducer = (state: Taskbar | undefined, action: TaskbarAction): Task
                 isMinimized: action.payload.isMinimized
             });
         case TaskbarActionType.focusWindow:
-            if (action.payload.window.zIndex === Window.lastZIndex) return state;
+            if (action.payload.window.zIndex === Window.lastZIndex && !action.payload.window.isMinimized) {
+                return state;
+            }
             return getTaskbarWithChangedWindow(state, action.payload.window, {
                 zIndex: ++Window.lastZIndex,
                 isMinimized: false

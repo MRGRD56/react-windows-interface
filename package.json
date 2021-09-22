@@ -15,6 +15,7 @@
         "@types/react-router-dom": "^5.1.9",
         "@types/react-transition-group": "^4.4.3",
         "immutable": "^4.0.0-rc.15",
+        "mg-image-fit": "^1.0.0",
         "mg-values": "^1.2.0",
         "moment": "^2.29.1",
         "node-sass": "5.0.0",

@@ -21,6 +21,8 @@
     .taskbar-item-windows-panel-item-header {
         display: flex;
         flex-direction: row;
+        font-size: 14px;
+        padding-bottom: 8px;
 
         .taskbar-item-windows-panel-item-header-icon {
             width: 16px;

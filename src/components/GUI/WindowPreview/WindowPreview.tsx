@@ -6,6 +6,7 @@ import WindowTitle from "../WindowTitle/WindowTitle";
 import Size from "../../../models/2d/Size";
 import "./WindowPreview.scss";
 import ISize from "../../../models/2d/ISize";
+import {fitObject} from "mg-image-fit";
 
 interface Props {
     window: IWindow,
@@ -21,20 +22,13 @@ const WindowPreview: FC<Props> = props => {
         if (!parent) return;
 
         const currentSize = new Size(element.offsetWidth, element.offsetHeight);
-        const parentSize = new Size(parent.offsetWidth, parent.offsetHeight);
-        const heightMultiplier = parentSize.height / currentSize.height;
-        const widthMultiplier = 200 / element.offsetHeight;
-        const scaleMultiplier = heightMultiplier >= 1
-            ? widthMultiplier
-            : widthMultiplier >= 1
-                ? widthMultiplier
-                : Math.min(widthMultiplier, heightMultiplier);
-        console.log(props.window.title + "W H S", widthMultiplier, heightMultiplier, scaleMultiplier);
-        if (scaleMultiplier >= 1) return;
+        const parentSize = new Size(200, parent.offsetHeight);
+        const fit = fitObject(currentSize, parentSize);
+        if (fit.scale >= 1) return;
 
-        const translatePercentage = -50 * scaleMultiplier + "%";
-        element.style.transform = `translate(${translatePercentage}, ${translatePercentage}) scale(${scaleMultiplier})`;
-        const actualHeight = currentSize.height * scaleMultiplier;
+        const translatePercentage = -50 * fit.scale + "%";
+        element.style.transform = `translate(${translatePercentage}, ${translatePercentage}) scale(${fit.scale})`;
+        const actualHeight = currentSize.height * fit.scale;
         const windowSize = props.window.rectangle.size;
         let width: number | string = actualHeight * (windowSize.width / windowSize.height);
         if (width < 84) {
@@ -44,9 +38,6 @@ const WindowPreview: FC<Props> = props => {
             width = 200;
         }
         props.onScale?.(width);
-        console.log("onScale", width);
-
-        //FIXME
     }
 
     useEffect(() => {
