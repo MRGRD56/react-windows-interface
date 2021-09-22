@@ -57,6 +57,10 @@
         display: flex;
     }
 
+    .taskbar-left-programs {
+        display: flex;
+    }
+
     .tray-item {
         @include button-zero;
         @extend .unselectable;
@@ -73,6 +77,10 @@
 
         &:hover {
             background: #2f3038;
+        }
+
+        &:active {
+            background: #363741;
         }
 
         &.acrylic:hover {

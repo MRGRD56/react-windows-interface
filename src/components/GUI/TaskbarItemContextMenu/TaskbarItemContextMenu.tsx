@@ -4,6 +4,7 @@ import "./TaskbarItemContextMenu.scss";
 import TaskbarItemContextMenuItem from "../TaskbarItemContextMenuItem/TaskbarItemContextMenuItem";
 import closeIcon from "../../../assets/img/OS/window/window_close.svg";
 import pinIcon from "../../../assets/img/OS/window/window_pin.png";
+import unpinIcon from "../../../assets/img/OS/window/window_unpin.png";
 import useActions from "../../../hooks/useActions";
 
 interface Props {
@@ -38,7 +39,7 @@ const TaskbarItemContextMenu: FC<Props> = ({taskbarItem}) => {
         <div className="taskbar-item-context-menu acrylic" onMouseDown={onMouseDown}>
             <TaskbarItemContextMenuItem icon={taskbarItem.file.iconSrc} label={taskbarItem.file.name}
                 onClick={openNewWindow}/>
-            <TaskbarItemContextMenuItem icon={pinIcon} label={taskbarItem.isPinned ? "Unpin" : "Pin"}
+            <TaskbarItemContextMenuItem icon={taskbarItem.isPinned ? unpinIcon : pinIcon} label={taskbarItem.isPinned ? "Unpin" : "Pin"}
                 onClick={togglePin}/>
             {taskbarItem.windows.size ? (
                 <TaskbarItemContextMenuItem icon={closeIcon} iconSize={12} isSingleColor

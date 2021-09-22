@@ -1,0 +1,14 @@
+@import "../../../styles/shared";
+
+.taskbar-item-windows-panel {
+    position: absolute;
+    height: 150px;
+    background-color: rgba(#282828, 0.99);
+    border: 1px solid #2b2b2b;
+    bottom: 40px;
+    color: white;
+    box-shadow: 0 0 10px 5px rgba(34, 60, 80, 0.2);
+    z-index: $z-index-max - 1;
+
+    display: flex;
+}

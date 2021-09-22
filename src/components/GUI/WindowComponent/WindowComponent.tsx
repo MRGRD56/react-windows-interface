@@ -186,10 +186,7 @@ const WindowComponent = ({window, focusedWindow, ...props}: Props) => {
             className={classes({
                 "active acrylic": () => isFocused,
                 "maximized": () => window.isMaximized,
-                "minimized": () => window.isMinimized,
-                "animated-short": () => false,
-                "animated-normal": () => false,
-                "closing": () => false
+                "minimized": () => window.isMinimized
             }, "window")}
             style={{...Rectangle.getStyle(window.rectangle), minWidth: getMinSize().width,
                 minHeight: getMinSize().height, zIndex: window.zIndex}}

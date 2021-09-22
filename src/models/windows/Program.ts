@@ -3,7 +3,9 @@ enum Program {
     explorer,
     calc,
     chrome,
-    terminal
+    terminal,
+    vsCode,
+    telegram,
 }
 
 export default Program;

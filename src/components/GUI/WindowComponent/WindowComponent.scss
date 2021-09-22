@@ -12,18 +12,6 @@
     transition: 0.2s ease-in;
     transition-property: background, backdrop-filter;
 
-    &.animated-short {
-        transition: width 0.075s, height 0.075s, left 0.075s, top 0.075s, opacity 0.075s, transform 0.075s;
-    }
-
-    &.animated-normal {
-        transition: width 0.5s, height 0.5s, left 0.5s, top 0.5s, opacity 0.5s, transform 0.5s;
-    }
-
-    &.animated-long {
-        transition: width 1s, height 1s, left 1s, top 1s, opacity 1s, transform 1s;
-    }
-
     &.acrylic {
         background: rgba(231, 231, 231, $acrylic-alpha);
     }

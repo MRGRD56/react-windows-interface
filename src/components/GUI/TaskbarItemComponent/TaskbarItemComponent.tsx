@@ -5,6 +5,7 @@ import useActions from "../../../hooks/useActions";
 import "./TaskbarItemComponent.scss";
 import TaskbarItemContextMenu from "../TaskbarItemContextMenu/TaskbarItemContextMenu";
 import {CSSTransition} from "react-transition-group";
+import TaskbarItemWindowsPanel from "../TaskbarItemWindowsPanel/TaskbarItemWindowsPanel";
 
 interface Props {
     item: TaskbarItem,
@@ -27,6 +28,9 @@ const TaskbarItemComponent: FC<Props> = ({item, activeItem, ...props}) => {
 
     return (
         <div className="taskbar-item-wrapper">
+            <CSSTransition timeout={100} in={item.isWindowsPanelShown} classNames="taskbar-item-windows-panel">
+                <TaskbarItemWindowsPanel taskbarItem={item}/>
+            </CSSTransition>
             <CSSTransition timeout={100} in={item.isContextMenuShown} classNames="taskbar-item-context-menu">
                 <TaskbarItemContextMenu taskbarItem={item}/>
             </CSSTransition>

@@ -3,6 +3,9 @@ import TaskbarAction from "../../models/store/windows/TaskbarAction";
 import TaskbarActionType from "../../models/store/windows/TaskbarActionType";
 import settingsIcon from "../../assets/img/programs/settings_dark.png";
 import explorerIcon from "../../assets/img/programs/explorer.png";
+import vsCodeIcon from "../../assets/img/programs/vscode.svg";
+import chromeIcon from "../../assets/img/programs/chrome.svg";
+import telegramIcon from "../../assets/img/programs/telegram.svg";
 import calcIcon from "../../assets/img/programs/calc.png";
 import Window from "../../models/windows/Window";
 import Program from "../../models/windows/Program";
@@ -16,6 +19,7 @@ import Rectangle from "../../models/2d/Rectangle";
 import Size from "../../models/2d/Size";
 import {ReactNode} from "react";
 import ISize from "../../models/2d/ISize";
+import Chrome from "../../components/programs/Chrome/Chrome";
 
 function createTaskbarItem(fileName: string, iconSrc: string, program: Program,
     content?: ReactNode, rectangle?: IRectangle, minSize?: ISize): TaskbarItem {
@@ -37,7 +41,10 @@ const defaultState: Taskbar = new Taskbar([
     createTaskbarItem("Calculator", calcIcon, Program.calc,
         <Calculator/>,
         Rectangle.getScreenCenter(new Size(300, 500)),
-        new Size(300, 500))
+        new Size(300, 500)),
+    createTaskbarItem("Google Chrome", chromeIcon, Program.chrome, <Chrome/>),
+    createTaskbarItem("Telegram", telegramIcon, Program.telegram),
+    createTaskbarItem("Visual Studio Code", vsCodeIcon, Program.vsCode)
 ]);
 
 function getTaskbarWithFile(taskbar: Taskbar, file: File): Taskbar {
@@ -218,7 +225,8 @@ const taskbarReducer = (state: Taskbar | undefined, action: TaskbarAction): Task
         case TaskbarActionType.focusWindow:
             if (action.payload.window.zIndex === Window.lastZIndex) return state;
             return getTaskbarWithChangedWindow(state, action.payload.window, {
-                zIndex: ++Window.lastZIndex
+                zIndex: ++Window.lastZIndex,
+                isMinimized: false
             });
         case TaskbarActionType.moveWindow:
             return getTaskbarWithChangedWindow(state, action.payload.window, {
