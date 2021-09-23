@@ -10,7 +10,7 @@ import {fitObject} from "mg-image-fit";
 
 interface Props {
     window: IWindow,
-    onScale?: (width: number | string) => void
+    onScale?: (width: number) => void
 }
 
 const WindowPreview: FC<Props> = props => {
@@ -24,25 +24,27 @@ const WindowPreview: FC<Props> = props => {
         const currentSize = new Size(element.offsetWidth, element.offsetHeight);
         const parentSize = new Size(200, parent.offsetHeight);
         const fit = fitObject(currentSize, parentSize);
-        if (fit.scale >= 1) return;
+        if (fit.scale >= 1) {
+            fit.scale = 1;
+        }
 
         const translatePercentage = -50 * fit.scale + "%";
         element.style.transform = `translate(${translatePercentage}, ${translatePercentage}) scale(${fit.scale})`;
         const actualHeight = currentSize.height * fit.scale;
         const windowSize = props.window.rectangle.size;
         let width: number | string = actualHeight * (windowSize.width / windowSize.height);
-        if (width < 84) {
-            width = "100%";
+        if (width < 100 - 16) {
+            width = 100 - 16;
         }
-        if (width > 200) {
-            width = 200;
+        if (width > 200 - 16) {
+            width = 200 - 16;
         }
         props.onScale?.(width);
     }
 
     useEffect(() => {
         scaleElement();
-    }, []);
+    }, [props.window.rectangle.size]);
 
     return (
         <div className="window-preview-wrapper">

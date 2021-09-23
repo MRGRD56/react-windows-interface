@@ -42,7 +42,7 @@
 
         & .window-content {
             overflow: hidden;
-            height: 100%;
+            height: calc(100% - 32px);
         }
     }
 }
