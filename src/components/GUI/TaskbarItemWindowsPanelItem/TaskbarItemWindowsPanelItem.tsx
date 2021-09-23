@@ -11,7 +11,7 @@ interface Props {
 
 const TaskbarItemWindowsPanelItem: FC<Props> = props => {
     const [previewWidth, setPreviewWidth] = useState<number>();
-    const {focusWindow, closePopups} = useActions();
+    const {focusWindow, closePopups, closeWindow} = useActions();
 
     function onClick() {
         focusWindow(props.window);
@@ -20,7 +20,7 @@ const TaskbarItemWindowsPanelItem: FC<Props> = props => {
 
     return (
         <div className="taskbar-item-windows-panel-item-wrapper">
-            <button className="taskbar-item-windows-panel-item-close-button">
+            <button className="taskbar-item-windows-panel-item-close-button" onClick={() => closeWindow(props.window)}>
                 <img src={closeIcon}/>
             </button>
             <button className="taskbar-item-windows-panel-item" onClick={onClick}>

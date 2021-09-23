@@ -83,6 +83,7 @@ function getTaskbarWithoutWindow(taskbar: Taskbar, window: IWindow): Taskbar {
             if (index !== taskbarItemIndex) return item;
             return {
                 ...item,
+                isWindowsPanelShown: item.windows.size > 1 && item.isWindowsPanelShown,
                 windows: item.windows.delete(item.windows.indexOf(window))
             };
         });
