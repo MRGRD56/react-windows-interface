@@ -32,7 +32,8 @@ const TaskbarItemComponent: FC<Props> = ({item, activeItem, ...props}) => {
     return (
         <div className="taskbar-item-wrapper">
             <CSSTransition timeout={100} in={item.isWindowsPanelShown} classNames="taskbar-item-popup">
-                <TaskbarItemWindowsPanel taskbarItem={item} disableTooltipsMode={props.disableTooltipsMode}/>
+                <TaskbarItemWindowsPanel taskbarItem={item} disableTooltipsMode={props.disableTooltipsMode}
+                    onMouseEnter={props.onMouseEnter}/>
             </CSSTransition>
             <CSSTransition timeout={100} in={item.isContextMenuShown} classNames="taskbar-item-popup">
                 <TaskbarItemContextMenu taskbarItem={item}/>

@@ -5,12 +5,14 @@ export interface Tooltips {
     isTooltipsMode: boolean;
     startTooltipsTimer: (callback?: () => void) => void;
     abortTooltipsTimer: () => void;
-    disableTooltipsMode: () => void;
+    startTooltipsDisabling: () => void;
+    abortTooltipsDisabling: () => void;
 }
 
 export default function useTooltips(onTooltipsModeChanged: (isTooltipsMode: boolean) => void, tooltipsModeTimeout = 500): Tooltips {
     const [isTooltipsMode, setIsTooltipsMode] = useState(false);
     const tooltipsTimer = useRef<NodeJS.Timeout>();
+    const tooltipsDisablingTimer = useRef<NodeJS.Timeout>();
     const startTooltipsTimer = (callback?: () => void) => {
         if (tooltipsTimer.current || isTooltipsMode) return;
         tooltipsTimer.current = setTimeout(() => {
@@ -25,14 +27,25 @@ export default function useTooltips(onTooltipsModeChanged: (isTooltipsMode: bool
             tooltipsTimer.current = undefined;
         }
     };
-    const disableTooltipsMode = () => {
-        setIsTooltipsMode(false);
-        onTooltipsModeChanged(false);
+    const startTooltipsDisabling = () => {
+        if (tooltipsDisablingTimer.current || !isTooltipsMode) return;
+        tooltipsDisablingTimer.current = setTimeout(() => {
+            abortTooltipsTimer();
+            setIsTooltipsMode(false);
+            onTooltipsModeChanged(false);
+        }, tooltipsModeTimeout);
+    };
+    const abortTooltipsDisabling = () => {
+        if (tooltipsDisablingTimer.current) {
+            clearTimeout(tooltipsDisablingTimer.current);
+            tooltipsDisablingTimer.current = undefined;
+        }
     };
     return {
         isTooltipsMode,
         startTooltipsTimer,
         abortTooltipsTimer,
-        disableTooltipsMode
+        startTooltipsDisabling,
+        abortTooltipsDisabling
     };
 }

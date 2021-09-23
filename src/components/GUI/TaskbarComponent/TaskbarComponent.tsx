@@ -31,6 +31,7 @@ const TaskbarComponent = ({taskbar, ...props}: Props) => {
     });
 
     function onItemMouseEnter(e: React.MouseEvent<HTMLButtonElement>, item: TaskbarItem) {
+        tooltips.abortTooltipsDisabling();
         if (tooltips.isTooltipsMode) {
             if (!item.isWindowsPanelShown) {
                 showTaskbarWindowsPanel(item);
@@ -58,13 +59,13 @@ const TaskbarComponent = ({taskbar, ...props}: Props) => {
                 <div style={{height: "100%", width: "3px"}}/>
                 <div className="taskbar-left-programs"
                     onMouseLeave={() => {
-                        tooltips.disableTooltipsMode();
+                        tooltips.startTooltipsDisabling();
                     }}>
                     {taskbar.items.map(item => (
                         <TaskbarItemComponent key={item.file.program} item={item} activeItem={activeItem}
                             onMouseEnter={e => onItemMouseEnter(e, item)}
                             onMouseLeave={e => onItemMouseLeave(e, item)}
-                            disableTooltipsMode={tooltips.disableTooltipsMode}/>
+                            disableTooltipsMode={tooltips.startTooltipsDisabling}/>
                     ))}
                 </div>
             </div>
