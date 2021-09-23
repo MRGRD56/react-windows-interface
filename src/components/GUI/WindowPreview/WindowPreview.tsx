@@ -22,7 +22,7 @@ const WindowPreview: FC<Props> = props => {
         if (!parent) return;
 
         const currentSize = new Size(element.offsetWidth, element.offsetHeight);
-        const parentSize = new Size(200, parent.offsetHeight);
+        const parentSize = new Size(200 - 16, parent.offsetHeight);
         const fit = fitObject(currentSize, parentSize);
         if (fit.scale >= 1) {
             fit.scale = 1;

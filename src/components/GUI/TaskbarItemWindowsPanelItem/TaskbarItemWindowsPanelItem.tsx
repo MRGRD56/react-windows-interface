@@ -24,7 +24,7 @@ const TaskbarItemWindowsPanelItem: FC<Props> = props => {
                 <img src={closeIcon}/>
             </button>
             <button className="taskbar-item-windows-panel-item" onClick={onClick}>
-                <div className="taskbar-item-windows-panel-item-header">
+                <div className="taskbar-item-windows-panel-item-header" style={{width: previewWidth}}>
                     <img className="taskbar-item-windows-panel-item-header-icon" src={props.window.iconSrc}/>
                     <div className="taskbar-item-windows-panel-item-header-label">
                         {props.window.title}
