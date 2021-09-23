@@ -145,7 +145,7 @@
     }
 }
 
-.taskbar-item-context-menu-enter {
+.taskbar-item-popup-enter {
     transition: 100ms ease-out;
     transition-property: bottom, transform, opacity;
     bottom: 20px !important;
@@ -153,7 +153,7 @@
     transform: scaleY(0.8);
 }
 
-.taskbar-item-context-menu-enter-active {
+.taskbar-item-popup-enter-active {
     bottom: 40px !important;
     pointer-events: none;
     transform: scaleY(1);

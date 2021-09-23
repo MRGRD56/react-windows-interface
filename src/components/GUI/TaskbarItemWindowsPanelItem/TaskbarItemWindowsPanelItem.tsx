@@ -6,7 +6,8 @@ import useActions from "../../../hooks/useActions";
 import closeIcon from "../../../assets/img/OS/window/window_close.svg";
 
 interface Props {
-    window: IWindow
+    window: IWindow,
+    disableTooltipsMode?: () => void
 }
 
 const TaskbarItemWindowsPanelItem: FC<Props> = props => {
@@ -15,6 +16,7 @@ const TaskbarItemWindowsPanelItem: FC<Props> = props => {
 
     function onClick() {
         focusWindow(props.window);
+        props.disableTooltipsMode?.();
         closePopups();
     }
 

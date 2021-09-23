@@ -1,4 +1,4 @@
-import React, {useMemo, useRef} from "react";
+import React, {MouseEventHandler, useEffect, useMemo, useRef} from "react";
 import Taskbar from "../../../models/store/windows/Taskbar";
 import "./TaskbarComponent.scss";
 import startIcon from "../../../assets/img/OS/system_start.svg";
@@ -13,17 +13,38 @@ import {classes} from "mg-values";
 import Clock from "../Clock/Clock";
 import TaskbarItemComponent from "../TaskbarItemComponent/TaskbarItemComponent";
 import useTooltips from "../../../hooks/useTooltips";
+import TaskbarItem from "../../../models/windows/TaskbarItem";
 
 interface Props {
     taskbar: Taskbar
 }
 
 const TaskbarComponent = ({taskbar, ...props}: Props) => {
-    const {openFile} = useActions();
+    const {openFile, showTaskbarWindowsPanel} = useActions();
     const activeItem = useMemo(() => {
         return taskbar.getActiveItem();
     }, [taskbar.items]);
-    const tooltips = useTooltips();
+    const tooltips = useTooltips(isTooltipsMode => {
+        if (!isTooltipsMode) {
+            showTaskbarWindowsPanel(null);
+        }
+    });
+
+    function onItemMouseEnter(e: React.MouseEvent<HTMLButtonElement>, item: TaskbarItem) {
+        if (tooltips.isTooltipsMode) {
+            if (!item.isWindowsPanelShown) {
+                showTaskbarWindowsPanel(item);
+            }
+        } else {
+            tooltips.startTooltipsTimer(() => {
+                showTaskbarWindowsPanel(item);
+            });
+        }
+    }
+
+    function onItemMouseLeave(e: React.MouseEvent<HTMLButtonElement>, item: TaskbarItem) {
+        tooltips.abortTooltipsTimer();
+    }
 
     return (
         <div className="taskbar acrylic">
@@ -36,13 +57,14 @@ const TaskbarComponent = ({taskbar, ...props}: Props) => {
                 </button>
                 <div style={{height: "100%", width: "3px"}}/>
                 <div className="taskbar-left-programs"
-                    onMouseOver={() => tooltips.startTooltipsTimer}
-                    onMouseOut={() => {
-                        tooltips.abortTooltipsTimer();
+                    onMouseLeave={() => {
                         tooltips.disableTooltipsMode();
                     }}>
                     {taskbar.items.map(item => (
-                        <TaskbarItemComponent key={item.file.program} item={item} activeItem={activeItem}/>
+                        <TaskbarItemComponent key={item.file.program} item={item} activeItem={activeItem}
+                            onMouseEnter={e => onItemMouseEnter(e, item)}
+                            onMouseLeave={e => onItemMouseLeave(e, item)}
+                            disableTooltipsMode={tooltips.disableTooltipsMode}/>
                     ))}
                 </div>
             </div>

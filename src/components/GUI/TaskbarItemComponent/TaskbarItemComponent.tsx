@@ -9,7 +9,10 @@ import TaskbarItemWindowsPanel from "../TaskbarItemWindowsPanel/TaskbarItemWindo
 
 interface Props {
     item: TaskbarItem,
-    activeItem: TaskbarItem | null
+    activeItem: TaskbarItem | null,
+    onMouseEnter?: MouseEventHandler<HTMLButtonElement>,
+    onMouseLeave?: MouseEventHandler<HTMLButtonElement>,
+    disableTooltipsMode?: () => void
 }
 
 const TaskbarItemComponent: FC<Props> = ({item, activeItem, ...props}) => {
@@ -28,10 +31,10 @@ const TaskbarItemComponent: FC<Props> = ({item, activeItem, ...props}) => {
 
     return (
         <div className="taskbar-item-wrapper">
-            <CSSTransition timeout={100} in={item.isWindowsPanelShown} classNames="taskbar-item-windows-panel">
-                <TaskbarItemWindowsPanel taskbarItem={item}/>
+            <CSSTransition timeout={100} in={item.isWindowsPanelShown} classNames="taskbar-item-popup">
+                <TaskbarItemWindowsPanel taskbarItem={item} disableTooltipsMode={props.disableTooltipsMode}/>
             </CSSTransition>
-            <CSSTransition timeout={100} in={item.isContextMenuShown} classNames="taskbar-item-context-menu">
+            <CSSTransition timeout={100} in={item.isContextMenuShown} classNames="taskbar-item-popup">
                 <TaskbarItemContextMenu taskbarItem={item}/>
             </CSSTransition>
             <button key={item.file.name} className={classes({
@@ -41,7 +44,9 @@ const TaskbarItemComponent: FC<Props> = ({item, activeItem, ...props}) => {
                 "hover": () => item.isContextMenuShown === true
             }, "taskbar-item")}
             onClick={() => clickTaskbarItem(item)} onAuxClick={onAuxClick}
-            onContextMenu={onContextMenu}>
+            onContextMenu={onContextMenu}
+            onMouseEnter={props.onMouseEnter}
+            onMouseLeave={props.onMouseLeave}>
                 <img className="unselectable taskbar-item-icon" src={item.file.iconSrc}/>
             </button>
         </div>
