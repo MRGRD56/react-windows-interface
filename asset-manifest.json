@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/react-windows-interface/static/css/main.dc9d6756.chunk.css",
+    "main.js": "/react-windows-interface/static/js/main.142d2a66.chunk.js",
+    "main.js.map": "/react-windows-interface/static/js/main.142d2a66.chunk.js.map",
+    "runtime-main.js": "/react-windows-interface/static/js/runtime-main.3437c0fb.js",
+    "runtime-main.js.map": "/react-windows-interface/static/js/runtime-main.3437c0fb.js.map",
+    "static/js/2.0a882b8b.chunk.js": "/react-windows-interface/static/js/2.0a882b8b.chunk.js",
+    "static/js/2.0a882b8b.chunk.js.map": "/react-windows-interface/static/js/2.0a882b8b.chunk.js.map",
+    "index.html": "/react-windows-interface/index.html",
+    "static/css/main.dc9d6756.chunk.css.map": "/react-windows-interface/static/css/main.dc9d6756.chunk.css.map",
+    "static/js/2.0a882b8b.chunk.js.LICENSE.txt": "/react-windows-interface/static/js/2.0a882b8b.chunk.js.LICENSE.txt",
+    "static/media/chrome.1bffca36.svg": "/react-windows-interface/static/media/chrome.1bffca36.svg",
+    "static/media/img19.2b47c04f.jpg": "/react-windows-interface/static/media/img19.2b47c04f.jpg",
+    "static/media/Chrome.module.scss": "/react-windows-interface/static/media/img25.fda1a417.jpg",
+    "static/media/system_search.7e484dc7.svg": "/react-windows-interface/static/media/system_search.7e484dc7.svg",
+    "static/media/system_start.211f945d.svg": "/react-windows-interface/static/media/system_start.211f945d.svg",
+    "static/media/telegram.bf14e98a.svg": "/react-windows-interface/static/media/telegram.bf14e98a.svg",
+    "static/media/vscode.026f1dab.svg": "/react-windows-interface/static/media/vscode.026f1dab.svg",
+    "static/media/window_close.dac92302.svg": "/react-windows-interface/static/media/window_close.dac92302.svg",
+    "static/media/window_maximize_maximized.c3cafd9f.svg": "/react-windows-interface/static/media/window_maximize_maximized.c3cafd9f.svg",
+    "static/media/window_maximize_normal.8b667f9b.svg": "/react-windows-interface/static/media/window_maximize_normal.8b667f9b.svg",
+    "static/media/window_minimize.34004303.svg": "/react-windows-interface/static/media/window_minimize.34004303.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.3437c0fb.js",
+    "static/js/2.0a882b8b.chunk.js",
+    "static/css/main.dc9d6756.chunk.css",
+    "static/js/main.142d2a66.chunk.js"
+  ]
+}
